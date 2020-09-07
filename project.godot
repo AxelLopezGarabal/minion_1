@@ -19,6 +19,10 @@ config/name="minion-2020s2-interacciones-simples"
 run/main_scene="res://minion1_2020.tscn"
 config/icon="res://icon.png"
 
+[audio]
+
+default_bus_layout=""
+
 [rendering]
 
 environment/default_environment="res://default_env.tres"
