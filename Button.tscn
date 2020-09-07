@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://fonts/new_dynamicfont.tres" type="DynamicFont" id=1]
+[ext_resource path="res://scrips/Button.gd" type="Script" id=2]
+
+
+[node name="Button" type="Button"]
+margin_left = 514.318
+margin_top = 317.48
+margin_right = 526.318
+margin_bottom = 337.48
+text = "Try Again"
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="."]
+margin_left = -136.937
+margin_top = -208.855
+margin_right = 157.063
+margin_bottom = -147.855
+custom_fonts/font = ExtResource( 1 )
+text = "Game Over"
+__meta__ = {
+"_edit_use_anchors_": false
+}
