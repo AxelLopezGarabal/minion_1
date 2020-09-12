@@ -62,10 +62,10 @@ func die():
 	hide()
 	emit_signal("hit")
 	$CollisionShape2D.set_deferred("disabled", true)
-	isAlive = !isAlive
+	isAlive = false
 
 func revive():
-	isAlive = !isAlive
+	isAlive = true
 	position = Vector2(500, 300)
 	consumed = 0
 	show()

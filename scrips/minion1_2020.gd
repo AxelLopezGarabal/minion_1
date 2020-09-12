@@ -9,6 +9,7 @@ export var points = 0
 export var needed_amount = 7
 var voidContainer
 var diamondContainer
+var random = RandomNumberGenerator.new()
 var gameOver
 var isAlive
 
@@ -43,7 +44,8 @@ func _process(delta):
 
 func next_Level():
 	if points == needed_amount:
-		needed_amount += needed_amount
+		random.randomize()
+		needed_amount = needed_amount + random.randi_range(4, needed_amount)
 		voidContainer.spawn()
 
 func tryAgain():
@@ -59,5 +61,4 @@ func tryAgain():
 	$AudioStreamPlayer2D.play()
 
 func player_die():
-	isAlive = false
 	player.die()
