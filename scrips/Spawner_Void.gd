@@ -39,9 +39,9 @@ func get_max_x_value():
 func get_max_y_value():
 	return get_viewport().get_visible_rect().size.y - 50
 
-func targetPlayer(player):
+func targetPlayer(player, delta):
 	for v in $Container.get_children():
-		v.targetPlayer(player)
+		v.targetPlayer(player, delta)
 
 func killChildren():
 	for child in $Container.get_children():

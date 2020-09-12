@@ -2,13 +2,14 @@ extends Area2D
 
 signal hit
 export var consumed = 0
-export var speed = 0.9
+export var speed = 190
+export var dash_speed = 380
 var isDashing = false
 export var isAlive = true
+var direction = Vector2()
 
 func _ready():
 	$CollisionShape2D.disabled = false
-	pass
 
 func _process(delta):
 	look_at(get_viewport().get_mouse_position())
@@ -20,8 +21,11 @@ func readInput():
 		dash()
 
 func follow(delta):
-	position.x += (get_viewport().get_mouse_position().x - position.x) * speed * delta
-	position.y += (get_viewport().get_mouse_position().y - position.y) * speed * delta
+	direction = (get_viewport().get_mouse_position() - global_position)
+	direction = direction.normalized()
+	rotation = direction.angle()
+	if position.distance_to(get_viewport().get_mouse_position()) > 20:
+		position += speed * delta * direction
 
 func dash():
 	if !isDashing:
@@ -42,24 +46,24 @@ func change_dashing():
 	isDashing = !isDashing
 
 func speed_up():
-	speed +=  2.7
+	speed +=  dash_speed
 
 func speed_down():
-	speed -= 2.7
+	speed -= dash_speed
 
 func _on_Player_body_entered(body):
-	#if body.is_in_group("arrow")
 	body.consume()
 	consumed += 1
 
 func _on_Player_area_entered(_area):
+	get_parent().player_die()
+
+func die():
 	hide()
 	emit_signal("hit")
 	$CollisionShape2D.set_deferred("disabled", true)
-	#revive()
 	isAlive = !isAlive
-	
-	
+
 func revive():
 	isAlive = !isAlive
 	position = Vector2(500, 300)

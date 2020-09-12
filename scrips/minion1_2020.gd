@@ -6,6 +6,7 @@ const GameOver = preload("res://Button.tscn")
 
 var player
 export var points = 0
+export var needed_amount = 7
 var voidContainer
 var diamondContainer
 var gameOver
@@ -25,18 +26,25 @@ func _ready():
 	
 	gameOver.hide()
 
-func _process(_delta):
+func _process(delta):
 	isAlive = player.isAlive
 	if isAlive:
-		voidContainer.targetPlayer(player)
+		voidContainer.targetPlayer(player, delta)
 		if not player.consumed == points:
 			$score._update(player.consumed)
 			points = player.consumed
+		next_Level()
 	if not isAlive:
 		gameOver.show()
 		$score.hide()
 		voidContainer.killChildren()
 		diamondContainer.killChildren()
+		$AudioStreamPlayer2D.stop()
+
+func next_Level():
+	if points == needed_amount:
+		needed_amount += needed_amount
+		voidContainer.spawn()
 
 func tryAgain():
 	player.revive()
@@ -48,3 +56,8 @@ func tryAgain():
 
 	diamondContainer = DiamondScene.instance()
 	add_child(diamondContainer)
+	$AudioStreamPlayer2D.play()
+
+func player_die():
+	isAlive = false
+	player.die()

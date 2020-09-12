@@ -3,15 +3,19 @@ extends Node2D
 const void_element = preload("res://Dimond.tscn")
 export var amount_dimonds = 5
 var flag
-
+export var lifespan = 5
 
 func _ready():
 	flag = true
 	spawnN(amount_dimonds)
 
-func _process(_delta):
+func _process(delta):
 	if $Container.get_children().size() == 0 and flag:
 		spawnN(amount_dimonds)
+	if lifespan <= 0:
+		consumeAll()
+		lifespan = 5
+	lifespan -= 1* delta
 
 func spawnN(n):
 	var i = n
@@ -51,3 +55,7 @@ func killChildren():
 	for child in $Container.get_children():
 		child.queue_free()
 	flag = false
+
+func consumeAll():
+	for child in $Container.get_children():
+		child.consume()
