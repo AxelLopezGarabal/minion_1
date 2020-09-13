@@ -3,7 +3,7 @@ extends Area2D
 signal hit
 export var consumed = 0
 export var speed = 190
-export var dash_speed = 380
+export var bonus_speed = 1
 var isDashing = false
 export var isAlive = true
 var direction = Vector2()
@@ -25,18 +25,15 @@ func follow(delta):
 	direction = direction.normalized()
 	rotation = direction.angle()
 	if position.distance_to(get_viewport().get_mouse_position()) > 20:
-		position += speed * delta * direction
+		position += speed * delta * direction * bonus_speed
 
 func dash():
 	if !isDashing:
 		change_dashing()
-		speed_up()
-		dash_end()
+		bonus_speed = 3
+		yield(get_tree().create_timer(0.4), "timeout")
+		bonus_speed = 1
 		cooldown()
-
-func dash_end():
-	yield(get_tree().create_timer(0.4), "timeout")
-	speed_down()
 
 func cooldown():
 	yield(get_tree().create_timer(2.0), "timeout")
@@ -44,12 +41,6 @@ func cooldown():
 
 func change_dashing():
 	isDashing = !isDashing
-
-func speed_up():
-	speed +=  dash_speed
-
-func speed_down():
-	speed -= dash_speed
 
 func _on_Player_body_entered(body):
 	body.consume()
