@@ -2,12 +2,14 @@ extends Area2D
 
 var direction = Vector2()
 export var speed = 100
-export var lifeSpanValue = 7
+export var lifeSpanValue = 0
+export(float) var friction = 0.9
 var hasTarget = false
 var lifeSpan
 var somePosition
 
 func _ready():
+	lifeSpanValue = RandomNumberGenerator.new().randi_range(5, 8)
 	lifeSpan = lifeSpanValue
 	somePosition = some_postion()
 	pass
@@ -25,6 +27,7 @@ func shoot(aim_pos, gun_pos, delta):
 	direction = (aim_pos - gun_pos)
 	direction = direction.normalized()
 	rotation = direction.angle()
+	
 	position += speed * delta * direction
 
 func updateDirection(positionParam, delta):

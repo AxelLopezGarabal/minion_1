@@ -8,6 +8,7 @@ radius = 34.5366
 
 [node name="Player" type="Area2D"]
 position = Vector2( 512, 300 )
+rotation = 0.432842
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_group_": true
