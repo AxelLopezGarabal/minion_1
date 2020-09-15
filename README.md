@@ -13,7 +13,7 @@
    >> ***done***.  
    
    > hace un "dash" hacia la dirección en la que apunte en ese momento(con barra espaciadora, aumenta su velocidad x3 durante 0.4 segundos, durante el dash no puede cambiar de direccion).  
-   >> ***done***.  
+   >> ***Half***.  
     
    ### Los triángulos 
    > aparecen en los agujeros.  
@@ -26,10 +26,10 @@
    >> ***done***.  
    
    > Hay una cantidad máxima de triángulos en juego.  
-   >>
+   >> ***missing***.  
    
    > Los triángulos tienen inercia.  
-   >>
+   >>***missing***.  
    
    > rompen el círculo si lo tocan.  
    >> ***done***.  
